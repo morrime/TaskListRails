@@ -27,4 +27,14 @@ def update
   end
 end
 
+def create
+  @task = Task.new(task_params)
+  if @task.save
+    # SAVED SUCCESSFULLY
+    redirect_to tasks_path
+  else
+    # DID NOT SAVE
+    render :new
+  end
+end
 end

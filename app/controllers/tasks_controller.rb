@@ -18,6 +18,7 @@ end
 def update
   @task = Task.find(params[:id])
   if @task.update(task_params)
+    
     # SUCCESS
     redirect_to tasks_path
   else
@@ -42,10 +43,23 @@ def destroy
   redirect_to tasks_path
 end
 
+def complete
+  @task = Task.find(params[:id])
+  if @task.complete == nil || @task.complete == false
+    @task.update(complete: true)
+    @task.update(completion_date: Date.today)
+    redirect_to task_path
+  else
+    # @task.update(completion_date: nil)
+    redirect_to task_path
+  end
+
+end
+
 private
 
 def task_params
-  params.require(:task).permit(:name, :description, :complete, :completion_date)
+  params.require(:task).permit(:name, :description, :complete)
 end
 
 

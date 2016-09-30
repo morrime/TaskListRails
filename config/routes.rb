@@ -7,12 +7,17 @@ Rails.application.routes.draw do
 
   root 'tasks#index'
   get '/tasks' => 'tasks#index'
+  # get '/tasks', to: 'tasks#index', as: 'task_home'
   get '/tasks/new', to: 'tasks#new', as: 'new_task'
+  post '/tasks/new', to: 'tasks#new'
   get '/tasks/:id', to: 'tasks#show', as: 'task'
   get '/tasks/:id/edit', to: 'tasks#edit', as: 'task_edit'
+  post '/tasks/:id/edit', to: 'tasks#edit'
   patch '/tasks/:id' => 'tasks#update'
   post '/tasks' => 'tasks#create'
   delete '/tasks/:id' => 'tasks#destroy'
+  patch '/tasks/:id/complete' => 'tasks#complete', as: 'task_complete'
+  get '/tasks/:id/complete' => 'tasks#update'
 
 
 

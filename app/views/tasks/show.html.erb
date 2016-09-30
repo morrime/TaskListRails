@@ -8,6 +8,7 @@
 </ul>
 
 
-<%= link_to "Edit", task_edit_path(@task.id) %>
-<%= link_to "Delete", task_path(@task.id), method: :delete,
+<%= button_to "Edit", task_edit_path(@task.id) %>
+<%= button_to "Delete", task_path(@task.id), method: :delete,
 data: {confirm: "Are you really, really sure?"}%>
+<%= button_to "Back to Task List", tasks_path, method: :get %>

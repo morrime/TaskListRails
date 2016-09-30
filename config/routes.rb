@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root 'tasks#index'
   get '/tasks' => 'tasks#index'
+  get '/tasks/new', to: 'tasks#new', as: 'new_task'
 
 
 

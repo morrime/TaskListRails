@@ -3,7 +3,6 @@ def index
   @tasks = Task.all
 end
 
-
 def new
   @task = Task.new
 end
@@ -36,6 +35,11 @@ def create
     # DID NOT SAVE
     render :new
   end
+end
+
+def destroy
+  Task.find(params[:id]).destroy
+  redirect_to tasks_path
 end
 
 private

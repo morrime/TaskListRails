@@ -8,8 +8,13 @@
   <h1>Tasks!</h1>
   <ol>
     <% @tasks.each do |task| %>
-    <li><%= link_to("#{task[:name]}", task_path(task)) %></li>
+    <li><%= link_to("#{task[:name]}", task_path(task)) %>
+      <%= link_to "Edit", task_edit_path(task) %>
+      <%= link_to "Delete", task_path(s.id), method: :delete,
+      data: {confirm: "Are you really, really sure?"}%>
+    </li>
     <% end %>
   </ol>
+  <%= link_to "Create New Task", new_task_path %>
 </body>
 </html>

@@ -1,0 +1,15 @@
+<%= form_for @task do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :complete %>
+  <%= f.checkbox :complete %>
+
+  <%= f.label :completion_date %>
+  <%= f.date_field :completion_date %>
+
+  <%= f.submit "Submit" %>
+<% end %>

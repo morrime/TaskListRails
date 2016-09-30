@@ -18,7 +18,13 @@ end
 def update
   @task = Task.find(params[:id])
   if @task.update(task_params)
-    
+    if @task.complete == false
+      @task.completion_date = nil
+      @task.save
+    else
+      @task.completion_date = Date.current
+      @task.save
+    end
     # SUCCESS
     redirect_to tasks_path
   else

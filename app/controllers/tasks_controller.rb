@@ -37,4 +37,12 @@ def create
     render :new
   end
 end
+
+private
+
+def task_params
+  params.require(:task).permit(:name, :description, :complete, :completion_date)
+end
+
+
 end

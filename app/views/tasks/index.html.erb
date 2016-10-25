@@ -5,18 +5,31 @@
   <title>TASK LIST</title>
 </head>
 <body>
-  <h1>Tasks!</h1>
-  <ol>
-    <% @tasks.each do |task| %>
-    <li><%= link_to("#{task[:name]}", task_path(task.id)) %>
-      <%= button_to "Edit", task_edit_path(task.id) %>
-      <%= button_to "Delete", task_path(task.id), method: :delete,
-      data: {confirm: "Are you really, really sure?"}%>
-      <%= button_to "Complete!", task_complete_path(task.id), method: :patch %>
-      <br><br><br>
-    </li>
+  <h1>
+    <% if !session[:user_id].nil? %>
+    <%=     button_to "Logout", sessions_path, method: :delete %>
+    <% else %>
+    <%=     button_to "LOGIN", "http://localhost:3000/auth/github", class: 'button sign-in' %>
+
     <% end %>
-  </ol>
-  <%= link_to "Create New Task", new_task_path %>
+  <h1>Tasks!</h1>
+
+
+<% if !session[:user_id].nil? %>
+    <ol>
+      <% @tasks.each do |task| %>
+      <li><%= link_to("#{task[:name]}", task_path(task.id)) %>
+        <%= button_to "Edit", task_edit_path(task.id) %>
+        <%= button_to "Delete", task_path(task.id), method: :delete,
+        data: {confirm: "Are you really, really sure?"}%>
+        <%= button_to "Complete!", task_complete_path(task.id), method: :patch %>
+        <br><br><br>
+      </li>
+      <% end %>
+    </ol>
+    <%= link_to "Create New Task", new_task_path %>
+<% else %>
+<h4>Must Login to view tasks</h4>
+<% end %>
 </body>
 </html>

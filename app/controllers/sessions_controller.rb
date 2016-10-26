@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def index
     if session[:user_id].nil?
-      redirect_to login_failure_path
+      redirect_to root_path
     else
       @user = User.find(session[:user_id])
     end
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    redirect_to login_failure_path
+    redirect_to root_path
   end
 
 end

@@ -5,7 +5,6 @@
   <li>Completion Date: <%= @task.completion_date %></li>
 </ul>
 
-
 <%= button_to "Edit", edit_task_path(@task.id) %>
 <%= button_to "Delete", task_path(@task.id), method: :delete,
 data: {confirm: "Are you really, really sure?"}%>

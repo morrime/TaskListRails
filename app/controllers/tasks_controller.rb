@@ -12,7 +12,12 @@ class TasksController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    if @task.user_id = !session[:user_id]
+      redirect_to tasks_path
+    else
+    end 
+  end
 
   def update
     if @task.update(task_params)

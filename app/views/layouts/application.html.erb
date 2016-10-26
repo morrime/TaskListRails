@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <nav>
+      <% if session[:user_id].nil? %>
+      <h3><%= link_to "Login", "/auth/github/" %></h3>
+      <% else %>
+      <h3><%= link_to "Logout", logout_path, method: :delete %></h3>
+      <% end %>
+    </nav>
+  </header>
+  <h1>Task List</h1>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

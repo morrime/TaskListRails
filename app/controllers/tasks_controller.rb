@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :complete]
 
   def index
-    @tasks = Task.all
+    tasks = Task.all.where(user_id: session[:user_id])
+    @tasks = tasks
   end
 
   def new
@@ -31,18 +32,29 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    if @task.save
-      # SAVED SUCCESSFULLY
-      redirect_to tasks_path
+    if (@task = Task.create(task_params))
+      @task.user_id = session[:user_id]
+      @task.save
+      redirect_to task_path(@task)
     else
-      # DID NOT SAVE
       render :new
     end
   end
 
+
+  # def create
+  #   @task = Task.new(task_params)
+  #   if @task.save
+  #     # SAVED SUCCESSFULLY
+  #     redirect_to task_path(@task)
+  #   else
+  #     # DID NOT SAVE
+  #     render :new
+  #   end
+  # end
+
   def destroy
-    Task.find(params[:id]).destroy
+    @task = Task.find(params[:id]).destroy
     redirect_to tasks_path
   end
 
@@ -66,7 +78,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :complete)
+    params.require(:task).permit(:name, :description, :complete, :user_id)
   end
 
 

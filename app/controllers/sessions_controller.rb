@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   skip_before_action :require_login, only: [:create, :login]
 
   def create
@@ -26,7 +25,6 @@ class SessionsController < ApplicationController
     @user = User.find(session[:user_id]) # < recalls the value set in a previous request
   end
 
-  
   def logout
     session.delete(:user_id)
     @current_user = nil

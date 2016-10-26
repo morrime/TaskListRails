@@ -23,10 +23,8 @@ class TasksController < ApplicationController
         @task.completion_date = Date.current
         @task.save
       end
-      # SUCCESS
       redirect_to tasks_path
     else
-      # NOPE, NO SUCCESS
       render :edit
     end
   end
@@ -41,34 +39,19 @@ class TasksController < ApplicationController
     end
   end
 
-
-  # def create
-  #   @task = Task.new(task_params)
-  #   if @task.save
-  #     # SAVED SUCCESSFULLY
-  #     redirect_to task_path(@task)
-  #   else
-  #     # DID NOT SAVE
-  #     render :new
-  #   end
-  # end
-
   def destroy
     @task = Task.find(params[:id]).destroy
     redirect_to tasks_path
   end
 
   def complete
-
     if @task.complete == nil || @task.complete == false
       @task.update(complete: true)
       @task.update(completion_date: Date.today)
       redirect_to task_path
     else
-      # @task.update(completion_date: nil)
       redirect_to task_path
     end
-
   end
 
   private
@@ -80,6 +63,4 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :description, :complete, :user_id)
   end
-
-
 end
